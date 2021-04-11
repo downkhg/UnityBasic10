@@ -183,10 +183,11 @@ namespace CSClass
             if (throwPokemon != null)//해당포켓몬이 있을때 ※null: 없음.
             {
                 throwPokemon.Show();
-
-                if(BattlePokemon(throwPokemon, new Pokemon("test", 100, 10)))
+                Pokemon pokemonWild = new Pokemon("test", 100, 10);
+                if(BattlePokemon(throwPokemon, pokemonWild ))
                 {
                     Console.WriteLine("Win!");
+                    trainner.Catch(pokemonWild);
                 }
                 else
                     Console.WriteLine("Lose!");

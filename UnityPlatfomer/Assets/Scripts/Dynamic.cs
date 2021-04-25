@@ -7,6 +7,7 @@ public class Dynamic : MonoBehaviour
     public float Speed;
     public float JumpPower = 100;
     public bool isJump = false;
+    public bool isLodder = false;
     public int Score;
 
     // Start is called before the first frame update
@@ -34,6 +35,38 @@ public class Dynamic : MonoBehaviour
                 isJump = true;
             }
         }
+
+        if(isLodder)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+                transform.position += Vector3.up * Speed * Time.deltaTime;
+            //왼쪽키이동하기
+            if (Input.GetKey(KeyCode.DownArrow))
+                transform.position += Vector3.down * Speed * Time.deltaTime;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+            rigidbody.velocity = Vector2.zero;//현재강체의 가속도를 0으로 만든다.
+            rigidbody.gravityScale = 0;
+            isLodder = true;
+        }
+        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Ladder")
+        {
+            isLodder = false;
+            Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 1;
+        }
+        Debug.Log("OnTriggerExit2D:" + collision.gameObject.name);
     }
 
     private void OnGUI()
@@ -47,6 +80,9 @@ public class Dynamic : MonoBehaviour
         //if (collision.gameObject.name == "Tilemap")
         {
             isJump = false;
+            Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
+            rigidbody.gravityScale = 1;
+
             Debug.Log("OnCollisionEnter2D:" + collision.gameObject.name);
         }
     }
@@ -57,13 +93,15 @@ public class Dynamic : MonoBehaviour
         Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //if (collision.gameObject.name == "cherry")
-        if (collision.gameObject.tag == "Item")
-        {
-            Score++;
-            Destroy(collision.gameObject);
-        }
-    }
+   
+
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    //if (collision.gameObject.name == "cherry")
+    //    if (collision.gameObject.tag == "Item")
+    //    {
+    //        Score++;
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
 }

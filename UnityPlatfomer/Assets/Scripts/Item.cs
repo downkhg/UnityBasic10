@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
  
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "player")
+        if(collision.gameObject.tag == "Player")
         {
             Dynamic dynamic = collision.gameObject.GetComponent<Dynamic>();
             dynamic.Score+=Score;

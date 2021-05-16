@@ -93,8 +93,6 @@ public class Dynamic : MonoBehaviour
         Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
     }
 
-   
-
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    //if (collision.gameObject.name == "cherry")

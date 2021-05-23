@@ -510,7 +510,6 @@ GameObject:
   - component: {fileID: 166766554}
   - component: {fileID: 166766553}
   - component: {fileID: 166766556}
-  - component: {fileID: 166766557}
   m_Layer: 0
   m_Name: eagle
   m_TagString: Monster
@@ -532,6 +531,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 1
   objTarget: {fileID: 0}
+  Site: 0.7
 --- !u!212 &166766554
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -612,22 +612,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.205
---- !u!58 &166766557
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 166766552}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1
 --- !u!1 &255889864
 GameObject:
   m_ObjectHideFlags: 0
@@ -4493,6 +4477,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5551760398916951312, guid: 9a7f4812a31de67408be276c574e011a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5551760398916951326, guid: 9a7f4812a31de67408be276c574e011a,
         type: 3}

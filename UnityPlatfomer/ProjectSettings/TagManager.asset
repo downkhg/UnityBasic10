@@ -17,11 +17,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Monster
+  - Bullet
+  - Ground
+  - Item
   - 
   - 
   - 

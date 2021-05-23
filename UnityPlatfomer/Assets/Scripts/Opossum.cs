@@ -21,7 +21,6 @@ public class Opossum : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            StartCoroutine(ProcessResponTimmer(collision.gameObject));
             Destroy(collision.gameObject);
         }
         else if(collision.gameObject.tag == "Bullet")
@@ -31,9 +30,5 @@ public class Opossum : MonoBehaviour
 
     }
 
-    IEnumerator ProcessResponTimmer(GameObject obj)
-    {
-        yield return new WaitForSeconds(1);
-        Instantiate(obj);
-    }
+   
 }

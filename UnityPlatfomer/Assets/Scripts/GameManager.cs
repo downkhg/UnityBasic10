@@ -8,15 +8,20 @@ public class GameManager : MonoBehaviour
     public Responner responnerOpossum;
     public Responner responnerEagle;
 
-    // Start is called before the first frame update
-    void Start()
+    public CameraTracker cameraTracker;
+
+    void ProcessCameraTrakerTarget()
     {
-        
+        if(cameraTracker.objTarget == null && responnerPlayer.objPlayer)
+        {
+            cameraTracker.objTarget = responnerPlayer.objPlayer;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        ProcessCameraTrakerTarget();
         ResponEangleProcess();
     }
 

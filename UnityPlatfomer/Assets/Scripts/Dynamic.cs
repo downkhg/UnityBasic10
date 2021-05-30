@@ -55,7 +55,7 @@ public class Dynamic : MonoBehaviour
             rigidbody.gravityScale = 0;
             isLodder = true;
         }
-        Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
+        //Debug.Log("OnTriggerEnter2D:" + collision.gameObject.name);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -66,7 +66,7 @@ public class Dynamic : MonoBehaviour
             Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
             rigidbody.gravityScale = 1;
         }
-        Debug.Log("OnTriggerExit2D:" + collision.gameObject.name);
+        //Debug.Log("OnTriggerExit2D:" + collision.gameObject.name);
     }
 
     private void OnGUI()
@@ -83,14 +83,14 @@ public class Dynamic : MonoBehaviour
             Rigidbody2D rigidbody = this.gameObject.GetComponent<Rigidbody2D>();
             rigidbody.gravityScale = 1;
 
-            Debug.Log("OnCollisionEnter2D:" + collision.gameObject.name);
+            //Debug.Log("OnCollisionEnter2D:" + collision.gameObject.name);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         //isJump = true; //다른블럭에서 이동했을때도 이 경우에 해당이 된다.
-        Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
+        //Debug.Log("OnCollisionExit2D:" + collision.gameObject.name);
     }
 
     //private void OnTriggerEnter2D(Collider2D collision)

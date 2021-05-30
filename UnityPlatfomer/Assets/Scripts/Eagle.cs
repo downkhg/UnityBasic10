@@ -8,10 +8,12 @@ public class Eagle : MonoBehaviour
     public GameObject objTarget;
     public float Site = 0.5f;
 
+    public GameObject objResponPoint;
+
     private void FixedUpdate()
     {
-        //ProcessFindTargetLayer("Player");
-        ProcessFindTarget("Player");
+        ProcessFindTargetLayer("Player");
+        //ProcessFindTarget("Player");
     }
     bool ProcessFindTargetLayer(string layername)
     {
@@ -31,7 +33,7 @@ public class Eagle : MonoBehaviour
     {
         Collider2D[] coliders =
             Physics2D.OverlapCircleAll(transform.position, Site);
-
+        Debug.Log("ColLength:"+ coliders.Length);
         for (int i = 0; i < coliders.Length; i++)
         {
             Collider2D collider = coliders[i];
@@ -53,6 +55,8 @@ public class Eagle : MonoBehaviour
     void Update()
     {
         ProcessTargetTraker();
+
+        if (objTarget == null) objTarget = objResponPoint;
     }
 
     bool ProcessTargetTraker()
@@ -78,7 +82,16 @@ public class Eagle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-            objTarget = collision.gameObject;
+        //if(collision.gameObject.tag == "Player")
+        //    objTarget = collision.gameObject;
+
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Bullet")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

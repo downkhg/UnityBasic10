@@ -22,17 +22,26 @@ public class Responner : MonoBehaviour
     {
         GameObject prefabPlayer = 
             Resources.Load("Prefabs/" + strPrefabName) as GameObject;
-        objPlayer = Instantiate(prefabPlayer);
-        objPlayer.transform.position = this.transform.position;
+        if (prefabPlayer)
+        {
+            objPlayer = Instantiate(prefabPlayer);
+            objPlayer.transform.position = this.transform.position;
+
+            //Eagle eagle = objPlayer.GetComponent<Eagle>();
+            //if(eagle)
+            //    eagle.objResponPoint = this.gameObject;
+        }
+        else
+            Debug.LogError(strPrefabName + "Load Failed!!!");
     }
 
     IEnumerator ProcessResponTimmer()
     {
-        Debug.Log("ProcessResponTimmer 1");
+        //Debug.Log("ProcessResponTimmer 1");
         isReady = true;
         yield return new WaitForSeconds(Time);
         ResponObject();
         isReady = false;
-        Debug.Log("ProcessResponTimmer 2");
+        //Debug.Log("ProcessResponTimmer 2");
     }
 }

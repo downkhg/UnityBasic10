@@ -9,8 +9,63 @@ public class Eagle : MonoBehaviour
     public float Site = 0.5f;
     
     public GameObject objResponPoint;
+    public GameObject objPatrolPoint;
 
     public bool isMove = false;
+
+    public enum E_AI_STATE { ATTACK, RETURN, PATROL }
+    public E_AI_STATE curAIState;
+
+    public void SetAIState(E_AI_STATE state)
+    {
+        switch(state)
+        {
+            case E_AI_STATE.ATTACK:
+
+                break;
+            case E_AI_STATE.RETURN:
+                objTarget = objResponPoint;
+                break;
+            case E_AI_STATE.PATROL:
+
+                break;
+        }
+        curAIState = state;
+    }
+
+    public void UpdateAIState()
+    {
+        switch (curAIState)
+        {
+            case E_AI_STATE.ATTACK:
+                if (objTarget == null) SetAIState(E_AI_STATE.RETURN);
+                break;
+            case E_AI_STATE.RETURN:
+                if (isMove == false) SetAIState(E_AI_STATE.PATROL); 
+                break;
+            case E_AI_STATE.PATROL:
+                ProcessPatrolEagle(objResponPoint, objPatrolPoint);
+                break;
+        }
+    }
+
+    public void ProcessPatrolEagle(GameObject objTargetA, GameObject objTargetB)
+    {
+        if (objTarget != null)
+        {
+            if (isMove == false)
+            {
+                if (objTarget.name == objTargetA.name)
+                {
+                    objTarget = objTargetB;
+                }
+                else if (objTarget.name == objTargetB.name)
+                {
+                    objTarget = objTargetA;
+                }
+            }
+        }
+    }
 
     bool ProcessTargetTraker()
     {
@@ -35,7 +90,8 @@ public class Eagle : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ProcessFindTargetLayer("Player");
+        if (ProcessFindTargetLayer("Player"))
+            SetAIState(E_AI_STATE.ATTACK);
         //ProcessFindTarget("Player");
     }
     bool ProcessFindTargetLayer(string layername)
@@ -77,7 +133,7 @@ public class Eagle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (objTarget == null) objTarget = objResponPoint;
+        UpdateAIState();
         ProcessTargetTraker();
     }
 

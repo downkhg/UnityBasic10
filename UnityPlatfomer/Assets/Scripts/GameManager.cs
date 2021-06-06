@@ -18,35 +18,35 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void ProcessPatrolEagle(GameObject objTargetA, GameObject objTargetB)
-    {
-        if (responnerEagle.objPlayer)
-        {
-            Eagle eagle = responnerEagle.objPlayer.GetComponent<Eagle>();
+    //void ProcessPatrolEagle(GameObject objTargetA, GameObject objTargetB)
+    //{
+    //    if (responnerEagle.objPlayer)
+    //    {
+    //        Eagle eagle = responnerEagle.objPlayer.GetComponent<Eagle>();
 
-            if (eagle.objTarget != null)
-            {
-                if (eagle.isMove == false)
-                {
-                    if (eagle.objTarget.name == objTargetA.name)
-                    {
-                        eagle.objTarget = objTargetB;
-                    }
-                    else if (eagle.objTarget.name == objTargetB.name)
-                    {
-                        eagle.objTarget = objTargetA;
-                    }
-                }
-            }
-        }
-    }
+    //        if (eagle.objTarget != null)
+    //        {
+    //            if (eagle.isMove == false)
+    //            {
+    //                if (eagle.objTarget.name == objTargetA.name)
+    //                {
+    //                    eagle.objTarget = objTargetB;
+    //                }
+    //                else if (eagle.objTarget.name == objTargetB.name)
+    //                {
+    //                    eagle.objTarget = objTargetA;
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     // Update is called once per frame
     void Update()
     {
         ProcessCameraTrakerTarget();
         ResponEagleProcess();
-        ProcessPatrolEagle(responnerEagle.gameObject, responnerOpossum.gameObject);
+        // ProcessPatrolEagle(responnerEagle.gameObject, responnerOpossum.gameObject);
     }
 
     void ResponEagleProcess()
@@ -54,8 +54,11 @@ public class GameManager : MonoBehaviour
         if (responnerEagle.objPlayer)
         {
             Eagle eagle = responnerEagle.objPlayer.GetComponent<Eagle>();
+            //eagle.ProcessPatrolEagle(responnerEagle.gameObject, responnerOpossum.gameObject);
             if(eagle.objResponPoint == null)
                 eagle.objResponPoint = responnerEagle.gameObject;
+            if (eagle.objPatrolPoint == null)
+                eagle.objPatrolPoint = responnerOpossum.gameObject;
         }
     }
 }

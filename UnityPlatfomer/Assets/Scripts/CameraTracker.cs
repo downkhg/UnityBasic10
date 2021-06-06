@@ -25,7 +25,6 @@ public class CameraTracker : MonoBehaviour
     void ProcessMovePointSync()
     {
         this.transform.position = objTarget.transform.position;
-        //}
     }
 
     void ProcessLerp(Vector3 vPos, Vector3 vTargetPos, float rat)

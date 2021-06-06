@@ -22,16 +22,16 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         ProcessCameraTrakerTarget();
-        ResponEangleProcess();
+        ResponEagleProcess();
     }
 
-    void ResponEangleProcess()
+    void ResponEagleProcess()
     {
         if (responnerEagle.objPlayer)
         {
             Eagle eagle = responnerEagle.objPlayer.GetComponent<Eagle>();
-
-            eagle.objResponPoint = responnerEagle.gameObject;
+            if(eagle.objResponPoint == null)
+                eagle.objResponPoint = responnerEagle.gameObject;
         }
     }
 }

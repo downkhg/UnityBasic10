@@ -10,6 +10,8 @@ public class Dynamic : MonoBehaviour
     public bool isLodder = false;
     public int Score;
 
+    public Gun gun;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,9 @@ public class Dynamic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z))
+            gun.Shot(GetComponent<Player>());
+
         if (Input.GetKey(KeyCode.RightArrow))
             transform.position += Vector3.right * Speed * Time.deltaTime;
         //왼쪽키이동하기
@@ -44,6 +49,8 @@ public class Dynamic : MonoBehaviour
             if (Input.GetKey(KeyCode.DownArrow))
                 transform.position += Vector3.down * Speed * Time.deltaTime;
         }
+
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

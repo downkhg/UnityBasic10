@@ -6,8 +6,8 @@ public class Gun : MonoBehaviour
 {
     public GameObject objBullet;
     public float ShotPower;
-
-    public void Shot()
+    
+    public void Shot(Player player)
     {
         //총알을 오른쪽으로 발사
         //같은 총알에 힘을준다 -> 공
@@ -17,18 +17,7 @@ public class Gun : MonoBehaviour
         copyBullet.transform.position = this.transform.position;
         Rigidbody2D rigidbody = copyBullet.GetComponent<Rigidbody2D>();
         rigidbody.AddForce(Vector3.right * ShotPower);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-            Shot();
+        Bullet bullet = copyBullet.GetComponent<Bullet>();
+        bullet.master = player;
     }
 }

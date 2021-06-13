@@ -26,10 +26,15 @@ public class Opossum : MonoBehaviour
 
         if(collider)
         {
-            Player monter = this.GetComponent<Player>();
+            Player monster = this.GetComponent<Player>();
             Player player = collider.gameObject.GetComponent<Player>();
 
-            monter.Attack(player);
+            SuperMode superMode = player.GetComponent<SuperMode>();
+            if (superMode && !superMode.isUse)
+            {
+                monster.Attack(player);
+                superMode.Active();
+            }
         }    
     }
 

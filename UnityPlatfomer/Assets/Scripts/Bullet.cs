@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     public float Dist;
     public Vector3 vStartPos;
+    public Player master;
 
     private void Start()
     {
@@ -33,7 +34,15 @@ public class Bullet : MonoBehaviour
         Debug.Log("Bullet.OnCollisionEnter2D:" + collision.gameObject.name);
         if(collision.gameObject.tag == "Monster")
         {
-            Destroy(collision.gameObject.gameObject);
+            //Destroy(collision.gameObject.gameObject);
+            Player monster = collision.gameObject.GetComponent<Player>();
+
+            SuperMode superMode = monster.GetComponent<SuperMode>();
+            if (superMode && !superMode.isUse)
+            {
+                master.Attack(monster);
+                superMode.Active();
+            }
         }
         
         if (collision.gameObject.tag != "Player" && 

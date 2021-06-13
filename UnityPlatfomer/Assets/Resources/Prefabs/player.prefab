@@ -201,6 +201,7 @@ MonoBehaviour:
   isJump: 0
   isLodder: 0
   Score: 0
+  gun: {fileID: 5551760398807077423}
 --- !u!50 &5551760398916951324
 Rigidbody2D:
   serializedVersion: 4

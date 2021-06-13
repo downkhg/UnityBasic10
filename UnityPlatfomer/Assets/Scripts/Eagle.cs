@@ -147,9 +147,5 @@ public class Eagle : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.tag == "Bullet")
-        {
-            Destroy(this.gameObject);
-        }
     }
 }

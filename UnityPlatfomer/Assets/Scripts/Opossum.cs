@@ -17,11 +17,30 @@ public class Opossum : MonoBehaviour
         transform.position += Vector3.left * Speed * Time.deltaTime;
     }
 
+    private void FixedUpdate()
+    {
+        Vector3 vPos = this.transform.position;
+        BoxCollider2D box = GetComponent<BoxCollider2D>();
+        int nLayer = 1 << LayerMask.NameToLayer("Player");
+        Collider2D collider = Physics2D.OverlapBox(vPos, box.size, 0,nLayer);
+
+        if(collider)
+        {
+            Player monter = this.GetComponent<Player>();
+            Player player = collider.gameObject.GetComponent<Player>();
+
+            monter.Attack(player);
+        }    
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            Destroy(collision.gameObject);
+            Player monter = this.GetComponent<Player>();
+            Player player = collision.gameObject.GetComponent<Player>();
+
+            monter.Attack(player);
         }
         else if(collision.gameObject.tag == "Bullet")
         {

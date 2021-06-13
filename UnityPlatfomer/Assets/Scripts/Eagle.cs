@@ -44,12 +44,12 @@ public class Eagle : MonoBehaviour
                 if (isMove == false) SetAIState(E_AI_STATE.PATROL); 
                 break;
             case E_AI_STATE.PATROL:
-                ProcessPatrolEagle(objResponPoint, objPatrolPoint);
+                ProcessPatrol(objResponPoint, objPatrolPoint);
                 break;
         }
     }
 
-    public void ProcessPatrolEagle(GameObject objTargetA, GameObject objTargetB)
+    public void ProcessPatrol(GameObject objTargetA, GameObject objTargetB)
     {
         if (objTarget != null)
         {

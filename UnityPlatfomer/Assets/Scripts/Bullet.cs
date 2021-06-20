@@ -35,12 +35,13 @@ public class Bullet : MonoBehaviour
         if(collision.gameObject.tag == "Monster")
         {
             //Destroy(collision.gameObject.gameObject);
+            Player player = GameManager.GetInstance().responnerPlayer.objPlayer.GetComponent<Player>(); //master;
             Player monster = collision.gameObject.GetComponent<Player>();
 
             SuperMode superMode = monster.GetComponent<SuperMode>();
             if (superMode && !superMode.isUse)
             {
-                master.Attack(monster);
+                player.Attack(monster);
                 superMode.Active();
             }
         }

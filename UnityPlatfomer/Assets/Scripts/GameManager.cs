@@ -10,6 +10,18 @@ public class GameManager : MonoBehaviour
 
     public CameraTracker cameraTracker;
 
+    static GameManager instance;
+
+    public static GameManager  GetInstance()
+    {
+        return instance;
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     void ProcessCameraTrakerTarget()
     {
         if(cameraTracker.objTarget == null && responnerPlayer.objPlayer)

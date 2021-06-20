@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858a2770535aa5478bebe9773d6ab99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 100
-  Atk: 10
+  Hp: 20
+  Atk: 5
   Exp: 0
   Lv: 1
   idxDebugGUI: 2

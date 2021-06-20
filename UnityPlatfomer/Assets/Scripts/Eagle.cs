@@ -93,7 +93,30 @@ public class Eagle : MonoBehaviour
         if (ProcessFindTargetLayer("Player"))
             SetAIState(E_AI_STATE.ATTACK);
         //ProcessFindTarget("Player");
+        ProcessAttack();
     }
+
+    void ProcessAttack()
+    {
+        Vector3 vPos = this.transform.position;
+        CircleCollider2D circle = GetComponent<CircleCollider2D>();
+        int nLayer = 1 << LayerMask.NameToLayer("Player");
+        Collider2D collider = Physics2D.OverlapCircle(vPos, circle.radius, nLayer);
+
+        if (collider)
+        {
+            Player monster = this.GetComponent<Player>();
+            Player player = collider.gameObject.GetComponent<Player>();
+
+            SuperMode superMode = player.GetComponent<SuperMode>();
+            if (superMode && !superMode.isUse)
+            {
+                monster.Attack(player);
+                superMode.Active();
+            }
+        }
+    }
+
     bool ProcessFindTargetLayer(string layername)
     {
         int nLayer = 1 << LayerMask.NameToLayer(layername);

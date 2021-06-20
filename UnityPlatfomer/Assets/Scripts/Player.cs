@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public void Attack(Player target)
     {
         target.Hp -= this.Atk;
+        if (target.Death())
+            StillExp(target);
     }
     public bool Death()
     {
@@ -19,6 +21,14 @@ public class Player : MonoBehaviour
         else
             return true;
     }
+    public int GetExp()
+    {
+        return Exp + Lv * 100;
+    }
+    public void StillExp(Player target)
+    {
+        Exp += target.GetExp();
+    }
     public void CheckLvUp()
     {
         if(Exp >= 100)
@@ -26,6 +36,7 @@ public class Player : MonoBehaviour
             Lv++;
             Hp += 10;
             Atk += 5;
+            Exp -= 100;
         }
     }
     public int idxDebugGUI;
@@ -53,6 +64,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Death()) 
+            Destroy(this.gameObject);
+
+        CheckLvUp();
     }
 }

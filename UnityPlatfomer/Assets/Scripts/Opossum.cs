@@ -34,6 +34,12 @@ public class Opossum : MonoBehaviour
             {
                 monster.Attack(player);
                 superMode.Active();
+
+                if (player.Death())
+                {
+                    GameManager.GetInstance().lastTarget = monster.gameObject;
+                    GameManager.GetInstance().SetGUIStatus(GameManager.E_GUI_STATUS.GAMEOVER);
+                }
             }
         }    
     }

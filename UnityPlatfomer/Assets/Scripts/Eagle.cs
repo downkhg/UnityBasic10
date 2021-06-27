@@ -113,6 +113,9 @@ public class Eagle : MonoBehaviour
             {
                 monster.Attack(player);
                 superMode.Active();
+
+                if (player.Death())
+                    GameManager.GetInstance().lastTarget = monster.gameObject;
             }
         }
     }

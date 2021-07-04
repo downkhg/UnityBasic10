@@ -22,7 +22,14 @@ public class Dynamic : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Z))
+        {
             gun.Shot(GetComponent<Player>(), dir);
+        }
+
+        if(Input.GetKey(KeyCode.S))
+        {
+            gun.LaserShot(GetComponent<Player>(), dir, 999999);
+        }
 
         if (Input.GetKey(KeyCode.RightArrow))
         {

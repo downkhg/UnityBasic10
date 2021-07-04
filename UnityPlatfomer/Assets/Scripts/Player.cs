@@ -59,6 +59,12 @@ public class Player : MonoBehaviour
     //    GUI.Box(new Rect(idxDebugGUI * nWidth, nOrder * nHight, nWidth, nHight),string.Format("Lv/Exp:{0}/{1}", Lv, Exp)); 
     //    nOrder++;
     //}
+    public GUIStatusBar guiHPBar;
+
+    public void UpdateHPBar()
+    {
+        if(guiHPBar) guiHPBar.SetStatus(Hp, MaxHp);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -69,9 +75,9 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Death()) 
-            Destroy(this.gameObject);
+        //if (Death()) Destroy(this.gameObject);
 
         CheckLvUp();
+        UpdateHPBar();
     }
 }

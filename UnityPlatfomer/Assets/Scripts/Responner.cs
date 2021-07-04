@@ -26,7 +26,7 @@ public class Responner : MonoBehaviour
         {
             objPlayer = Instantiate(prefabPlayer);
             objPlayer.transform.position = this.transform.position;
-
+            objPlayer.name = strPrefabName;
             //Eagle eagle = objPlayer.GetComponent<Eagle>();
             //if(eagle)
             //    eagle.objResponPoint = this.gameObject;

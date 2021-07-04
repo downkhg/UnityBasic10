@@ -3,6 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class MonsterInfo
+{
+    public string name;
+    public string coment;
+    public string image;
+
+    public MonsterInfo(string name, string coment, string image)
+    {
+        this.name = name;
+        this.coment = coment;
+        this.image = image;
+    }
+}
+
 public class GameManager : MonoBehaviour
 {
     public Responner responnerPlayer;
@@ -10,6 +25,29 @@ public class GameManager : MonoBehaviour
     public Responner responnerEagle;
 
     public CameraTracker cameraTracker;
+
+    public List<string> Inventory;
+
+    public void SetInventory(string name)
+    {
+        Inventory.Add(name);
+    }
+
+    public string GetInventory(int idx)
+    {
+        return Inventory[idx];
+    }
+
+    public string GetInventory(string name)
+    {
+        return Inventory.Find(item => item.Equals(name));
+    }
+
+    public void OnGUI()
+    {
+        for (int i = 0; i < Inventory.Count; i++)
+            GUI.Box(new Rect(0, 0 + (20 * i), 100, 20), Inventory[i]);
+    }
 
     static GameManager instance;
 
@@ -32,8 +70,17 @@ public class GameManager : MonoBehaviour
     public Image imgLastTarget;
     public GameObject lastTarget;
 
+    public Dictionary<string, MonsterInfo> monsterInfos = new Dictionary<string, MonsterInfo>();
+    
+    public GUIInventory guiInventory;
+    public GUIContentInfo guiContentInfo;
+    public GameObject popupLayer;
+
     private void Start()
     {
+        monsterInfos.Add("eagle", new MonsterInfo("독수리", "날아다닌다", "eagle"));
+        monsterInfos.Add("opossum", new MonsterInfo("주머니쥐", "기어다닌다", "opossum"));
+
         guiHPBar.InitBarSize();
         SetGUIStatus(curGUIStatus);
     }
@@ -88,6 +135,8 @@ public class GameManager : MonoBehaviour
                 imgLastTarget.sprite = lastTarget.GetComponent<SpriteRenderer>().sprite;
                 break;
             case E_GUI_STATUS.PLAY:
+
+
                 Time.timeScale = 1;
                 break;
         }
@@ -106,6 +155,20 @@ public class GameManager : MonoBehaviour
             case E_GUI_STATUS.GAMEOVER:
                 break;
             case E_GUI_STATUS.PLAY:
+                if (Input.GetKeyDown(KeyCode.I))
+                {
+                    if (popupLayer.activeSelf == false)
+                    {
+                        guiInventory.InitInventory();
+                        popupLayer.SetActive(true);
+                    }
+                    else
+                    {
+                        popupLayer.SetActive(false);
+                        guiInventory.ClearInventory();
+                    }
+                }
+
                 break;
         }
     }
@@ -121,6 +184,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        UpdateStatus();
         UpdatePlayerStatus();
         ProcessCameraTrakerTarget();
         ResponEagleProcess();

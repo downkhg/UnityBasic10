@@ -13,7 +13,10 @@ public class Player : MonoBehaviour
     {
         target.Hp -= this.Atk;
         if (target.Death())
+        {
             StillExp(target);
+            GameManager.GetInstance().SetInventory(target.gameObject.name);
+        }
     }
     public bool Death()
     {
